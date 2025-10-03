@@ -73,7 +73,7 @@ pip install ultralytics
 Usage
 
 1. Prepare images
-Place your medicine pack images into the data directory
+Place the test images in data folder and change the directory in infer.py and infer1.py respectively 
 
 2. Run detection and decoding
 ```bash
@@ -87,6 +87,7 @@ python infer1.py --input data/ --output outputs/submission_detection.json
 ```bash
 python infer1.py --input data/ --output outputs/submission_decoding2.json
 ```
+
 
 
 
