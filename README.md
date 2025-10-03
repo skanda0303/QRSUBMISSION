@@ -77,12 +77,13 @@ Usage:
 
 2. Run the infer.py
 ```bash
-python infer1.py --input data/ --output outputs/submission_detection.json
+python infer.py --input data/ --output outputs/submission_detection.json
 ```
 3. Run the infer1.py
 ```bash
 python infer1.py --input data/ --output outputs/submission_decoding2.json
 ```
+
 
 
 
