@@ -59,25 +59,32 @@ QRSUBMISSION/
 1. Clone the repository
 ```bash
 git clone https://github.com/skanda0303/QRSUBMISSION.git
-cd QRSUBMISSION ```
+cd QRSUBMISSION
+```
 
 2. Install dependencies
 ```bash
-pip install -r requirements.txt```
+pip install -r requirements.txt
+```
+3. Install YOLOv8 (optional)
+   ```bash
+pip install ultralytics
+```
+Usage
+
+1. Prepare images
+Place your medicine pack images into the images/ directory.
+
+2. Run detection and decoding
+```bash
+python infer.py --input images/ --output results.json
+```
 
 
 
 
 
 
-
-
-
-
-
-
-- **Stage 1:** `outputs/submission_detection_1.json` - QR code bounding box predictions
-- **Stage 2:** `outputs/submission_decoding_2.json` - Decoded QR codes with type classification
 
 
 
