@@ -6,7 +6,7 @@
 
 ## 📄 Project Overview
 This project is a **Multi-QR Code Recognition System** designed to accurately detect and decode multiple QR codes from images of medicine packs.  
-Many medicine packages contain multiple codes (for manufacturers, batch numbers, distributors, and regulators). This system detects all QR codes in a single image and extracts their values and precise positions.
+The images have been annotated and trained on yolo v8 so that detection and decoding happens properly.
 
 ---
 
@@ -15,7 +15,6 @@ Many medicine packages contain multiple codes (for manufacturers, batch numbers,
 - Extract QR code values and classify their type
 - Provide **bounding box coordinates** for each QR code
 - Export results in structured **JSON** format
-- Supports batch processing of multiple images
 
 ---
 
@@ -70,23 +69,21 @@ pip install -r requirements.txt
 ```bash
 pip install ultralytics
 ```
-Usage
+Usage:
 
-1. Prepare images
-Place the test images in data folder and change the directory in infer.py and infer1.py respectively 
 
-2. Run detection and decoding
-```bash
-python infer.py --input images/ --output results.json
-```
-3. Run the infer.py
+1.Place the test images in data folder and change the directory in infer.py and infer1.py respectively 
+
+
+2. Run the infer.py
 ```bash
 python infer1.py --input data/ --output outputs/submission_detection.json
 ```
-4. Run the infer1.py
+3. Run the infer1.py
 ```bash
 python infer1.py --input data/ --output outputs/submission_decoding2.json
 ```
+
 
 
 
