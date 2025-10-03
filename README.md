@@ -79,6 +79,14 @@ Place your medicine pack images into the images/ directory.
 ```bash
 python infer.py --input images/ --output results.json
 ```
+3. Run the infer.py
+```bash
+python infer1.py --input data/ --output outputs/submission_detection.json
+```
+4. Run the infer1.py
+```bash
+python infer1.py --input data/ --output outputs/submission_detection.json
+```
 
 
 
