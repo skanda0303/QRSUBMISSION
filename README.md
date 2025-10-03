@@ -1,53 +1,92 @@
-# Multi-QR Code Recognition for Medicine Packs 💊
+Multi-QR Code Recognition for Medicine Packs 💊
 
-## 📄 Project Overview
-This project is a **Multi-QR Code Recognition System** designed to accurately detect and decode multiple QR codes from images of medicine packs. Given that many medicine packages contain multiple codes (for manufacturers, batch numbers, distributors, and regulators), this system aims to detect all QR codes in a single image, extracting their values and precise positions.
+Overview
 
----
+A Multi-QR Code Recognition System designed to detect and decode multiple QR codes from images of medicine packs. It extracts values, classifies them, and records bounding box positions in JSON format.
 
-## ✨ Key Features
-* Detect multiple QR codes in a single image.
-* Extract QR code values and classify their type.
-* Provide **bounding box coordinates** for each QR code.
-* Export results in structured **JSON** format.
-* Supports batch processing of multiple images.
+Key Features
 
----
 
-## ⚙️ Technology Stack
-| Component | Details |
-| :--- | :--- |
-| **Language** | Python 3.10+ |
-| **Core Libraries** | OpenCV (for image processing and decoding) |
-| **Advanced Detection** | PyTorch / YOLOv8 (optional) |
-| **Output Format** | JSON (for structured results) |
 
----
 
-## 📂 Project Structure
-```text
+
+Detect multiple QR codes in a single image
+
+
+
+Extract QR code values and classify types
+
+
+
+Provide bounding box coordinates
+
+
+
+Export results in structured JSON format
+
+
+
+Support for batch processing
+
+Technology
+
+
+
+
+
+Python 3.10+
+
+
+
+OpenCV for image processing and QR code decoding
+
+
+
+PyTorch / YOLOv8 (optional) for object detection
+
+
+
+JSON for structured output
+
+Project Structure
+
 QRSUBMISSION/
-│
-├── README.md                 # Setup & usage instructions (This file)
-├── requirements.txt          # Python dependencies
-├── train.py                  # Training script
-├── infer.py                  # Core inference script (Input: images → Output: JSON)
-├── evaluate.py               # (Optional) for self-check with provided GT
-│
-├── data/                     # Placeholder for the dataset
-│   └── demo_images/          # Small demo set
-│
-├── outputs/                  # Location for generated results and submission files
-│   ├── submission_detection_1.json    # Required output file (Stage 1)
-│   └── submission_decoding_2.json     # Required output file (Stage 2, bonus)
-│
-└── src/                      # Actual model code, utilities, etc.
-    ├── models/
-    ├── datasets/
-    └── utils.py
+├── README.md
+├── requirements.txt
+├── train.py
+├── infer.py
+├── evaluate.py
+├── data/
+│   └── demo_images/
+├── outputs/
+│   ├── submission_detection_1.json
+│   └── submission_decoding_2.json
+├── src/
+│   ├── models/
+│   ├── datasets/
+│   └── utils.py
 
+Installation
 
-🚀 Installation
-1. Clone the Repository
-git clone [https://github.com/skanda0303/QRSUBMISSION.git](https://github.com/skanda0303/QRSUBMISSION.git)
+1. Clone the repository
+
+git clone https://github.com/skanda0303/QRSUBMISSION.git
 cd QRSUBMISSION
+
+2. Install dependencies
+
+pip install -r requirements.txt
+
+3. Install YOLOv8 (optional)
+
+pip install ultralytics
+
+Usage
+
+1. Prepare images
+
+Place your medicine pack images into the data/demo_images/ directory.
+
+2. Run detection and decoding
+
+python infer.py --input data/demo_images/ --output outputs/results.json
