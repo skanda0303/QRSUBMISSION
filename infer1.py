@@ -7,7 +7,7 @@ from ultralytics import YOLO
 
 # --- Paths ---
 MODEL_WEIGHTS =  r"src\models\finalmodelweight.pt"    # replace with your trained weights
-TEST_IMAGES_DIR = "QR_DS/test_images"
+TEST_IMAGES_DIR = "data/demo_images"
 OUTPUT_JSON = "submission_decoding_2.json"
 
 # --- Classification Logic ---
@@ -68,3 +68,4 @@ with open(OUTPUT_JSON, "w") as f:
     json.dump(submission, f, indent=4)
 
 print(f"✅ Detection + Classification results saved to {OUTPUT_JSON}")
+
