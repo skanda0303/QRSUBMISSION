@@ -1,25 +1,51 @@
-# Multi-QR Code Recognition Hackathon
+# Multi-QR Code Recognition for Medicine Packs 💊
 
-This repository contains a two-stage solution for multi-QR code detection and decoding using YOLOv8 for detection and OpenCV's QRCodeDetector for decoding, with automatic classification of QR types (batch, manufacturer, distributor, regulator).
+## 📄 Project Overview
+This project is a **Multi-QR Code Recognition System** designed to accurately detect and decode multiple QR codes from images of medicine packs. Given that many medicine packages contain multiple codes (for manufacturers, batch numbers, distributors, and regulators), this system aims to detect all QR codes in a single image, extracting their values and precise positions.
 
-## 📁 Repository Structure
+---
 
-```
-multiqr-hackathon/
-├── README.md                           # Setup & usage instructions
-├── requirements.txt                    # Python dependencies
-├── train.py                           # Model training script
-├── infer.py                           # Stage 1: Detection inference
-├── infer2.py                          # Stage 2: Decoding inference
-├── outputs/
-│   ├── submission_detection_1.json    # Stage 1 output
-│   └── submission_decoding_2.json     # Stage 2 output
-└── src/
-    ├── models/                        # Model weights and outputs
-    ├── datasets/                      # Dataset files
-    ├── utils/                         # Utility functions
-    └── __init__.py
-```
+## ✨ Key Features
+* Detect multiple QR codes in a single image.
+* Extract QR code values and classify their type.
+* Provide **bounding box coordinates** for each QR code.
+* Export results in structured **JSON** format.
+* Supports batch processing of multiple images.
+
+---
+
+## ⚙️ Technology Stack
+| Component | Details |
+| :--- | :--- |
+| **Language** | Python 3.10+ |
+| **Core Libraries** | OpenCV (for image processing and decoding) |
+| **Advanced Detection** | PyTorch / YOLOv8 (optional) |
+| **Output Format** | JSON (for structured results) |
+
+---
+
+## 📂 Project Structure
+```text
+QRSUBMISSION/
+│
+├── README.md                 # Setup & usage instructions (This file)
+├── requirements.txt          # Python dependencies
+├── train.py                  # Training script
+├── infer.py                  # Core inference script (Input: images → Output: JSON)
+├── evaluate.py               # (Optional) for self-check with provided GT
+│
+├── data/                     # Placeholder for the dataset
+│   └── demo_images/          # Small demo set
+│
+├── outputs/                  # Location for generated results and submission files
+│   ├── submission_detection_1.json    # Required output file (Stage 1)
+│   └── submission_decoding_2.json     # Required output file (Stage 2, bonus)
+│
+└── src/                      # Actual model code, utilities, etc.
+    ├── models/
+    ├── datasets/
+    └── utils.py
+
 
 ## 🚀 Setup Instructions
 
@@ -173,16 +199,10 @@ SAVE_IMAGES = True
 - OpenCV
 - NumPy
 
-See `requirements.txt` for the complete list of dependencies.
 
-## 📝 Notes
-
-- Ensure all paths in configuration files use absolute paths or are relative to the project root
-- The `data.yaml` file must be updated with correct paths before training
-- Model weights are saved automatically during training with early stopping enabled
-- Both stages can save annotated images for visual inspection by setting `SAVE_IMAGES = True`
 
 ## 🏆 Submission Files
 
 - **Stage 1:** `outputs/submission_detection_1.json` - QR code bounding box predictions
 - **Stage 2:** `outputs/submission_decoding_2.json` - Decoded QR codes with type classification
+
