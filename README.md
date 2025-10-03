@@ -85,8 +85,9 @@ python infer1.py --input data/ --output outputs/submission_detection.json
 ```
 4. Run the infer1.py
 ```bash
-python infer1.py --input data/ --output outputs/submission_detection.json
+python infer1.py --input data/ --output outputs/submission_decoding2.json
 ```
+
 
 
 
