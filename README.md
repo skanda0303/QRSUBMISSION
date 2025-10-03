@@ -51,6 +51,7 @@ QRSUBMISSION/
     ├── models/
     ├── datasets/
     └── utils.py
+```
 
 
 ## 🚀 Setup Instructions
@@ -77,6 +78,7 @@ pip install -r requirements.txt```
 
 - **Stage 1:** `outputs/submission_detection_1.json` - QR code bounding box predictions
 - **Stage 2:** `outputs/submission_decoding_2.json` - Decoded QR codes with type classification
+
 
 
 
