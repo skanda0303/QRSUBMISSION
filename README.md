@@ -1,92 +1,188 @@
-Multi-QR Code Recognition for Medicine Packs 💊
+# Multi-QR Code Recognition Hackathon
 
-Overview
+This repository contains a two-stage solution for multi-QR code detection and decoding using YOLOv8 for detection and OpenCV's QRCodeDetector for decoding, with automatic classification of QR types (batch, manufacturer, distributor, regulator).
 
-A Multi-QR Code Recognition System designed to detect and decode multiple QR codes from images of medicine packs. It extracts values, classifies them, and records bounding box positions in JSON format.
+## 📁 Repository Structure
 
-Key Features
-
-
-
-
-
-Detect multiple QR codes in a single image
-
-
-
-Extract QR code values and classify types
-
-
-
-Provide bounding box coordinates
-
-
-
-Export results in structured JSON format
-
-
-
-Support for batch processing
-
-Technology
-
-
-
-
-
-Python 3.10+
-
-
-
-OpenCV for image processing and QR code decoding
-
-
-
-PyTorch / YOLOv8 (optional) for object detection
-
-
-
-JSON for structured output
-
-Project Structure
-
-QRSUBMISSION/
-├── README.md
-├── requirements.txt
-├── train.py
-├── infer.py
-├── evaluate.py
-├── data/
-│   └── demo_images/
+```
+multiqr-hackathon/
+├── README.md                           # Setup & usage instructions
+├── requirements.txt                    # Python dependencies
+├── train.py                           # Model training script
+├── infer.py                           # Stage 1: Detection inference
+├── infer2.py                          # Stage 2: Decoding inference
 ├── outputs/
-│   ├── submission_detection_1.json
-│   └── submission_decoding_2.json
-├── src/
-│   ├── models/
-│   ├── datasets/
-│   └── utils.py
+│   ├── submission_detection_1.json    # Stage 1 output
+│   └── submission_decoding_2.json     # Stage 2 output
+└── src/
+    ├── models/                        # Model weights and outputs
+    ├── datasets/                      # Dataset files
+    ├── utils/                         # Utility functions
+    └── __init__.py
+```
 
-Installation
+## 🚀 Setup Instructions
 
-1. Clone the repository
+### 1. Clone the Repository
 
-git clone https://github.com/skanda0303/QRSUBMISSION.git
-cd QRSUBMISSION
+```bash
+git clone https://github.com/Sudeepa110/multiqr-hackathon.git
+cd multiqr-hackathon
+```
 
-2. Install dependencies
+### 2. Environment Setup
 
+Create and activate a Python virtual environment:
+
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Linux/Mac:
+source venv/bin/activate
+
+# On Windows:
+venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
+```
 
-3. Install YOLOv8 (optional)
+### 3. Data Preparation
 
-pip install ultralytics
+Place your dataset folder (eg.`QR_DS`) inside the `src/datasets/` directory, then update the `data.yaml` file with correct paths,i.e copy the paths of test_images,train_images,valid_ images placed in src/datasets/QR_DS and paste it in the data.yaml file:
 
-Usage
 
-1. Prepare images
+**Example `data.yaml`:**
 
-Place your medicine pack images into the data/demo_images/ directory.
+```yaml
+# Training images path
+train: /path/to/your/project/src/datasets/QR_DS/train_images/images
 
-2. Run detection and decoding
+# Validation images path
+val: /path/to/your/project/src/datasets/QR_DS/valid_images/images
 
-python infer.py --input data/demo_images/ --output outputs/results.json
+# Test images path
+test: /path/to/your/project/src/datasets/QR_DS/test_images/images
+
+# Number of classes
+nc: 1
+
+# Class names
+names: ['qr_codes']
+```
+
+> **Note:** Replace `/path/to/your/project/` with your actual project directory path.
+
+## ⚙️ Configuration
+
+All scripts contain configurable variables at the top for easy customization.
+
+### Training Configuration (`train.py`)
+
+```python
+DATA_YAML = "src/datasets/data.yaml"    # Dataset configuration path
+EPOCHS = 100                             # Training epochs
+BATCH_SIZE = 16                          # Batch size
+IMG_SIZE = 640                           # Training image size
+PATIENCE = 20                            # Early stopping patience
+PRETRAINED_MODEL = "yolov8n.pt"         # Pretrained model
+PROJECT_NAME = "src/models"              # Model save directory
+MODEL_NAME = "qr_detector"               # Model subfolder name
+```
+
+
+## 🎯 Usage
+
+### Training the Model
+
+Train the YOLOv8 model for QR code detection:
+
+```bash
+python train.py
+```
+
+**Output:** Trained model weights saved to `src/models/qr_detector/weights/best.pt`
+
+### Stage 1: QR Code Detection
+
+Detects QR codes in images and generates bounding box predictions.
+
+**Steps:**
+
+1. **Update paths in `infer.py`:**
+   - `MODEL_PATH`: Path to `best.pt` from `src/models/qr_detector/weights/`
+   - `INPUT_DIR`: Path to `test_images` from `src/datasets/QR_DS/`
+   - `OUTPUT_DIR`: Path to `outputs` folder
+
+### Stage 1 Configuration (`infer.py`) 
+   - You find it at the end of the code in infer.py
+
+```python
+MODEL_PATH = r"D:\multiqr-hackaton\src\models\qr_detector\weights\best.pt"
+INPUT_DIR = r"D:\multiqr-hackaton\src\datasets\QR_DS\test_images"
+OUTPUT_DIR = r"D:\multiqr-hackaton\outputs"
+SAVE_IMAGES = True
+```
+2. **Run detection:**
+   ```bash
+   python infer.py
+   ```
+
+3. **Output:**
+   - Annotated images: `src/models/predict_stage1_annotated/`
+   - JSON results: `outputs/submission_detection_1.json`
+
+### Stage 2: QR Code Decoding
+
+Decodes detected QR codes and classifies them by type.
+
+**Steps:**
+
+1. **Update paths in `infer2.py`:**
+   - `MODEL_PATH`: Path to `best.pt` from `src/models/qr_detector/weights/`
+   - `INPUT_DIR`: Path to `test_images` from `src/datasets/QR_DS/`
+   - `OUTPUT_DIR`: Path to `outputs` folder
+
+### Stage 2 Configuration (`infer2.py`)
+ - You find it at the end of the code in infer2.py
+
+```python
+MODEL_PATH = r"D:\multiqr-hackaton\src\models\qr_detector\weights\best.pt"
+INPUT_DIR = r"D:\multiqr-hackaton\src\datasets\QR_DS\test_images"
+OUTPUT_DIR = r"D:\multiqr-hackaton\outputs"
+SAVE_IMAGES = True
+```
+
+
+2. **Run decoding:**
+   ```bash
+   python infer2.py
+   ```
+
+3. **Output:**
+   - Annotated images: `src/models/predict_stage2_annotated/`
+   - JSON results: `outputs/submission_decoding_2.json`
+
+## 📋 Requirements
+
+- Python 
+- PyTorch
+- Ultralytics YOLOv8
+- OpenCV
+- NumPy
+
+See `requirements.txt` for the complete list of dependencies.
+
+## 📝 Notes
+
+- Ensure all paths in configuration files use absolute paths or are relative to the project root
+- The `data.yaml` file must be updated with correct paths before training
+- Model weights are saved automatically during training with early stopping enabled
+- Both stages can save annotated images for visual inspection by setting `SAVE_IMAGES = True`
+
+## 🏆 Submission Files
+
+- **Stage 1:** `outputs/submission_detection_1.json` - QR code bounding box predictions
+- **Stage 2:** `outputs/submission_decoding_2.json` - Decoded QR codes with type classification
