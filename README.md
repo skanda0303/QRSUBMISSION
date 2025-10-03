@@ -1,5 +1,7 @@
 # Multi-QR Code Recognition for Medicine Packs 💊
 
+# This project works only with python 3.10
+
 ## 📄 Project Overview
 This project is a **Multi-QR Code Recognition System** designed to accurately detect and decode multiple QR codes from images of medicine packs. Given that many medicine packages contain multiple codes (for manufacturers, batch numbers, distributors, and regulators), this system aims to detect all QR codes in a single image, extracting their values and precise positions.
 
@@ -19,7 +21,7 @@ This project is a **Multi-QR Code Recognition System** designed to accurately de
 | :--- | :--- |
 | **Language** | Python 3.10+ |
 | **Core Libraries** | OpenCV (for image processing and decoding) |
-| **Advanced Detection** | PyTorch / YOLOv8 (optional) |
+| **Advanced Detection** | PyTorch / YOLOv8  |
 | **Output Format** | JSON (for structured results) |
 
 ---
@@ -205,4 +207,5 @@ SAVE_IMAGES = True
 
 - **Stage 1:** `outputs/submission_detection_1.json` - QR code bounding box predictions
 - **Stage 2:** `outputs/submission_decoding_2.json` - Decoded QR codes with type classification
+
 
