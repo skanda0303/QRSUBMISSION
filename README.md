@@ -67,7 +67,7 @@ cd QRSUBMISSION
 pip install -r requirements.txt
 ```
 3. Install YOLOv8 (optional)
-   ```bash
+```bash
 pip install ultralytics
 ```
 Usage
@@ -79,6 +79,7 @@ Place your medicine pack images into the images/ directory.
 ```bash
 python infer.py --input images/ --output results.json
 ```
+
 
 
 
