@@ -5,8 +5,8 @@ from glob import glob
 
 # --- Paths ---
 MODEL_WEIGHTS =  r"src\models\finalmodelweight.pt"   
-TEST_IMAGES_DIR = "QR_DS/test_images"
-OUTPUT_JSON = "submission_detection_1.json"
+TEST_IMAGES_DIR = "data/demo_images"
+OUTPUT_JSON = "finaltest_submission_detection_2.json"
 
 # --- Load model ---
 model = YOLO(MODEL_WEIGHTS)
@@ -32,3 +32,4 @@ with open(OUTPUT_JSON, "w") as f:
     json.dump(submission, f, indent=2)
 
 print(f"✅ Detection results saved to {OUTPUT_JSON}")
+
